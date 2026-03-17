@@ -433,28 +433,45 @@
       .hero-counter { gap: 1.2rem; }
       .reasons-grid { grid-template-columns: 1fr; }
       .memories-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
       }
       .mem-item {
-        grid-column: span 1;
+        grid-column: span 1 !important;
         display: flex;
         flex-direction: column;
         border-radius: 3px;
         overflow: hidden;
       }
-      .mem-item.landscape { grid-column: span 2; }
-      .mem-img-wrap { aspect-ratio: 1 !important; flex-shrink: 0; }
-      .mem-item.landscape .mem-img-wrap { aspect-ratio: 16/9 !important; }
+      .mem-img-wrap {
+        aspect-ratio: unset !important;
+        height: auto !important;
+      }
+      .mem-img-wrap img {
+        width: 100%;
+        height: auto;
+        object-fit: unset;
+        display: block;
+      }
       .mem-caption {
         position: static;
-        transform: none;
+        transform: none !important;
         background: var(--surface);
-        color: var(--text);
-        font-size: 0.72rem;
-        padding: 0.6rem 0.7rem 0.7rem;
-        line-height: 1.5;
-        border-top: 1px solid rgba(212,165,176,0.12);
+        color: var(--cream-dim);
+        font-size: 0.9rem;
+        font-style: italic;
+        padding: 1rem 1rem 1.4rem;
+        line-height: 1.7;
+        border-top: 1px solid rgba(212,165,176,0.15);
+        letter-spacing: 0.01em;
+      }
+      .memories-grid {
+        gap: 1.8rem;
+      }
+      .mem-item {
+        border-radius: 6px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+        border: 1px solid rgba(212,165,176,0.13);
       }
     }
   </style>
