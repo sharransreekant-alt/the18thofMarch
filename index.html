@@ -20,8 +20,7 @@
       --text: #eddde2;
       --text-dim: #9a7080;
     }
-    html { scroll-behavior: smooth; }
-    *, *::before, *::after { max-width: 100%; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -437,14 +436,25 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
       }
-      .mem-item { grid-column: span 1; }
+      .mem-item {
+        grid-column: span 1;
+        display: flex;
+        flex-direction: column;
+        border-radius: 3px;
+        overflow: hidden;
+      }
       .mem-item.landscape { grid-column: span 2; }
-      .mem-img-wrap { aspect-ratio: 1 !important; }
+      .mem-img-wrap { aspect-ratio: 1 !important; flex-shrink: 0; }
       .mem-item.landscape .mem-img-wrap { aspect-ratio: 16/9 !important; }
       .mem-caption {
-        transform: translateY(0);
+        position: static;
+        transform: none;
+        background: var(--surface);
+        color: var(--text);
         font-size: 0.72rem;
-        padding: 0.9rem 0.6rem 0.5rem;
+        padding: 0.6rem 0.7rem 0.7rem;
+        line-height: 1.5;
+        border-top: 1px solid rgba(212,165,176,0.12);
       }
     }
   </style>
