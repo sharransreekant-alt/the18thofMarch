@@ -474,6 +474,89 @@
         border: 1px solid rgba(212,165,176,0.13);
       }
     }
+  
+    /* ===== MUSIC PLAYER ===== */
+    .music-player {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: rgba(23,16,25,0.92);
+      border: 1px solid rgba(212,165,176,0.25);
+      border-radius: 50px;
+      padding: 0.65rem 1.1rem 0.65rem 0.65rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+      transition: all 0.3s ease;
+    }
+    .music-player:hover {
+      border-color: rgba(212,165,176,0.5);
+    }
+    .music-btn {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      background: var(--gold);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .music-btn:hover {
+      background: var(--gold-light);
+      transform: scale(1.08);
+    }
+    .music-btn svg {
+      width: 0.9rem;
+      height: 0.9rem;
+      fill: var(--bg);
+    }
+    .music-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+    .music-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.78rem;
+      color: var(--cream);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 160px;
+    }
+    .music-sub {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .music-note {
+      font-size: 0.95rem;
+      animation: musicPulse 2s ease infinite;
+    }
+    @keyframes musicPulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+    @media (max-width: 768px) {
+      .music-player {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        border-radius: 50px;
+        justify-content: space-between;
+      }
+      .music-title { max-width: 120px; }
+    }
   </style>
 </head>
 <body>
@@ -825,6 +908,48 @@
     requestAnimationFrame(tick);
   }
   tick();
+
+  // ===== MUSIC PLAYER =====
+  let isPlaying = false;
+  let player = null;
+  let ytReady = false;
+
+  const ytScript = document.createElement('script');
+  ytScript.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(ytScript);
+
+  function onYouTubeIframeAPIReady() {
+    ytReady = true;
+    player = new YT.Player('yt1', {
+      height: '1', width: '1',
+      videoId: 'lp-EO5I60KA',
+      playerVars: { autoplay: 0, controls: 0, playsinline: 1 },
+      events: {
+        onStateChange: function(e) {
+          if (e.data === YT.PlayerState.ENDED) {
+            player.seekTo(0);
+            player.playVideo();
+          }
+        }
+      }
+    });
+  }
+
+  function togglePlay() {
+    if (!ytReady || !player) return;
+    if (isPlaying) {
+      player.pauseVideo();
+      isPlaying = false;
+      document.getElementById('playIcon').innerHTML = '<polygon points="5,3 19,12 5,21"/>';
+      document.getElementById('musicNote').style.animationPlayState = 'paused';
+    } else {
+      player.playVideo();
+      isPlaying = true;
+      document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+      document.getElementById('musicNote').style.animationPlayState = 'running';
+    }
+  }
+
 </script>
 
 <div class="lightbox" id="lightbox">
@@ -857,5 +982,23 @@
   });
   lb.style.display = 'none';
 </script>
+
+<!-- ===== MUSIC PLAYER ===== -->
+<div class="music-player" id="musicPlayer">
+  <button class="music-btn" id="playPauseBtn" onclick="togglePlay()" title="Play / Pause">
+    <svg id="playIcon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+  </button>
+  <div class="music-info">
+    <div class="music-title">Thinking Out Loud</div>
+    <div class="music-sub">Ed Sheeran · Our first dance</div>
+  </div>
+  <span class="music-note" id="musicNote">♪</span>
+</div>
+
+<!-- Hidden YouTube iframe -->
+<div style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;">
+  <div id="yt1"></div>
+</div>
+
 </body>
 </html>
