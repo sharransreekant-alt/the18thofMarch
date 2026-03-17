@@ -21,6 +21,7 @@
       --text-dim: #9a7080;
     }
     html { scroll-behavior: smooth; }
+    *, *::before, *::after { max-width: 100%; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -424,12 +425,27 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 600px) {
-      .letter-section { padding: 2rem 1.5rem; }
-      .letter-section::after { font-size: 14rem; }
-      .memories-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 768px) {
+      body { overflow-x: hidden; }
+      section { padding: 4rem 1.2rem; }
+      .letter-section { padding: 2rem 1.2rem; }
+      .letter-section::after { font-size: 10rem; }
+      .letter-body { font-size: 1rem; line-height: 1.9; }
+      .hero-counter { gap: 1.2rem; }
+      .reasons-grid { grid-template-columns: 1fr; }
+      .memories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+      .mem-item { grid-column: span 1; }
       .mem-item.landscape { grid-column: span 2; }
-      .hero-counter { gap: 1.5rem; }
+      .mem-img-wrap { aspect-ratio: 1 !important; }
+      .mem-item.landscape .mem-img-wrap { aspect-ratio: 16/9 !important; }
+      .mem-caption {
+        transform: translateY(0);
+        font-size: 0.72rem;
+        padding: 0.9rem 0.6rem 0.5rem;
+      }
     }
   </style>
 </head>
