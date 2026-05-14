@@ -1024,6 +1024,65 @@
   </div>
 </section>
 
+
+<!-- ===== BIRTHDAY LETTERS ===== -->
+<section class="fade-in-up" style="max-width:860px;margin:0 auto;padding:2rem 2rem 5rem;">
+  <div class="divider" style="margin-bottom:3rem;"></div>
+  <span class="section-label">Every year, a letter</span>
+  <h2 class="section-title" style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);color:var(--cream);margin-bottom:1.5rem;line-height:1.2;">Birthday Letters</h2>
+  <div class="gold-line"></div>
+  <p style="font-style:italic;color:var(--text-dim);margin-bottom:2.5rem;font-size:1rem;">One letter for every year you're loved. This collection grows with us.</p>
+
+  <!-- 36th Birthday -->
+  <div style="margin-bottom:1.2rem;">
+    <button onclick="toggleBdayCard('bday36')" style="
+      width:100%;
+      background: var(--surface);
+      border: 1px solid rgba(212,165,176,0.2);
+      border-radius: 8px;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      padding: 1.1rem 1.5rem;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+    " onmouseover="this.style.borderColor='rgba(212,165,176,0.5)'" onmouseout="this.style.borderColor='rgba(212,165,176,0.2)'">
+      <span>🎂 &nbsp; 36th Birthday — 13 May 2025</span>
+      <span id="bday36icon" style="color:var(--gold-dim);font-style:normal;font-size:1.2rem;">+</span>
+    </button>
+    <div id="bday36" style="max-height:0;overflow:hidden;transition:max-height 1s ease;">
+      <div style="
+        margin-top:0.5rem;
+        background: var(--surface);
+        border: 1px solid rgba(212,165,176,0.12);
+        border-radius: 0 0 8px 8px;
+        padding: 2.5rem;
+      ">
+        <div style="font-family:'Great Vibes',cursive;font-size:2.2rem;color:var(--gold-light);margin-bottom:1.5rem;">Happy Birthday, babe ❤️</div>
+        <div style="font-size:1.05rem;line-height:2;color:var(--text);font-style:italic;">
+          <p style="margin-bottom:1.2rem;">Thirty six years ago today, the world got a little bit better. It just didn't know yet that it was making someone for me.</p>
+          <p style="margin-bottom:1.2rem;">This birthday is different. This year, you're not just celebrating you — you're celebrating the woman who became a mother. And babe, what a mother you are. Watching you with Esha every single day takes my breath away. The patience, the love, the way you look at her — it's the most beautiful thing I've ever seen.</p>
+          <p style="margin-bottom:1.2rem;">You deserve every good thing today. Every bit of rest, every moment of joy, every reason to smile. You give so much of yourself to us — today is yours.</p>
+          <p>I love you more than I'll ever be able to say. Happy birthday to my best friend, my wife, and the most incredible mum to our little girl.</p>
+        </div>
+        <div style="font-family:'Great Vibes',cursive;font-size:2rem;color:var(--gold);margin-top:1.8rem;">All my love, always — Shaz 🎂</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Placeholder for future years - hidden comment for Shaz:
+    Copy the block above and paste below this comment for each new birthday.
+    Update the id (bday37, bday38 etc), the button label, and the letter content.
+  -->
+
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer>
   <div class="footer-name">Esh &amp; Shaz</div>
@@ -1275,6 +1334,19 @@
 
   })();
 
+
+  function toggleBdayCard(id) {
+    const card = document.getElementById(id);
+    const icon = document.getElementById(id + 'icon');
+    if (card.style.maxHeight === '0px' || card.style.maxHeight === '') {
+      card.style.maxHeight = '2000px';
+      icon.textContent = '−';
+    } else {
+      card.style.maxHeight = '0';
+      icon.textContent = '+';
+    }
+  }
+
 </script>
 
 <div class="lightbox" id="lightbox">
@@ -1438,6 +1510,19 @@
     tickConfetti();
 
   })();
+
+
+  function toggleBdayCard(id) {
+    const card = document.getElementById(id);
+    const icon = document.getElementById(id + 'icon');
+    if (card.style.maxHeight === '0px' || card.style.maxHeight === '') {
+      card.style.maxHeight = '2000px';
+      icon.textContent = '−';
+    } else {
+      card.style.maxHeight = '0';
+      icon.textContent = '+';
+    }
+  }
 
 </script>
 
