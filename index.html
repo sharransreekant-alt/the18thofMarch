@@ -1567,6 +1567,7 @@
   // Preview any time with ?anniv=1  (optionally &hour=17&min=30 to fake the time of day)
   (function() {
     const qs = new URLSearchParams(location.search);
+    if (qs.get('anniv') === 'off') return; // preview of the page as it looks the day after
     const preview = qs.get('anniv') === '1';
     let offset = 0;
     if (preview && qs.has('hour')) {
@@ -2016,7 +2017,7 @@ Love, Esha 🍼`;
 <script>
   // New anniversary memories appear from 20 Oct 2026 onwards (and stay)
   (function() {
-    if (new Date() >= new Date(2026, 9, 20) || new URLSearchParams(location.search).get('anniv') === '1') {
+    if (new Date() >= new Date(2026, 9, 20) || ['1', 'off'].includes(new URLSearchParams(location.search).get('anniv'))) {
       document.querySelectorAll('.an-later').forEach(el => el.classList.remove('an-later'));
     }
   })();
